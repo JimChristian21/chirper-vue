@@ -38,7 +38,7 @@ class ChirpPolicy
     public function update(User $user, Chirp $chirp): bool
     {
 
-        return $chirp->user()->is($user);
+        return $this->isUser($user, $chirp);
     }
 
     /**
@@ -46,7 +46,8 @@ class ChirpPolicy
      */
     public function delete(User $user, Chirp $chirp): bool
     {
-        //
+        
+        return $this->isUser($user, $chirp);
     }
 
     /**
@@ -63,5 +64,11 @@ class ChirpPolicy
     public function forceDelete(User $user, Chirp $chirp): bool
     {
         //
+    }
+
+    protected function isUser($user, $model): bool 
+    {
+
+        return $model->user()->is($user);
     }
 }
